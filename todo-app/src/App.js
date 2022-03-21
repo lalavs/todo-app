@@ -1,9 +1,10 @@
 import React from 'react';
+import TodoItem from './components/item/TodoItem.jsx';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello world</h1>
+      <TodoItem />
     </div>
   );
 }

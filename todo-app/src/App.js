@@ -1,5 +1,6 @@
 import React from 'react';
-import TodoItem from './components/item/TodoItem.jsx';
+import TodoItem from './item/TodoItem';
+
 
 function App() {
   return (

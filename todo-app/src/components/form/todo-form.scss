@@ -1,0 +1,23 @@
+@import '/src/styles/colors.scss';
+@import '@fontsource/josefin-sans';
+
+.todo {
+  &-input {
+    padding: 16px 32px 16px 16px;
+    width: 320px;
+    border: 1px solid $clr-ds-5;
+    border-radius: 4px 0 0 4px;
+    background: $clr-card-bg;
+    color: $clr-ds-4;
+    outline: none;
+  }
+  &-button {
+    padding: 17px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    outline: none;
+    background: $clr-ds-5;
+    color: $clr-ds-1;
+  }
+}

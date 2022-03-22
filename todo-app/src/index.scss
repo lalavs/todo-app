@@ -1,3 +1,6 @@
+@import './styles/colors.scss';
+@import '@fontsource/josefin-sans';
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -5,5 +8,6 @@
 }
 
 body {
-  background: #f7ede2;
+  background: $clr-page-bg;
+  font-family: 'Josefin Sans', sans-serif;
 }

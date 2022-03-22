@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
-import './todoItem.scss';
+import './todo-form.scss';
 
 const TodoItem = (props) => {
   const [task, setTask] = useState('');
+  const [id, setId] = useState(0);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // props.onSubmit({
-    //   id: Date.now(),
-    //   text: task,
-    // })
-
-    setTask('');
+  const giveId = () => {
+    setId(id + 1);
+    return id;
   }
 
-  const handleChange = (e) => {
-    setTask(e.target.value)
+  const addNewTask = (e) => {
+    e.preventDefault();
+
+    props.onSubmit({
+      id: giveId(),
+      text: task,
+    })
+
+    setTask('');
   }
 
   return (
     <form 
         className='todo-form'
-        onSubmit={handleSubmit}>
+        onSubmit={addNewTask}>
       <input 
         type='text'
-        name='text'
-        placeholder='Добавить задание'
+        placeholder='Create a new todo...'
         className='todo-input'
         value={task}
-        onChange={handleChange}
+        onChange={e => setTask(e.target.value)}
       />
       <button 
         className='todo-button'
       >
-          Добавить
+          Add
       </button>
     </form>
   )

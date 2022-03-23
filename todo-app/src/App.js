@@ -1,10 +1,16 @@
 import React from 'react';
-import TodoItem from './item/TodoItem';
+import Todo from './components/todo/Todo.jsx';
+import TodoItem from './components/item/TodoItem.jsx';
+
+
 
 
 function App() {
   return (
-    <div className="App">
+    <div className="todo-app">
+      <Todo />
+      <TodoItem />
+      <TodoItem />
       <TodoItem />
     </div>
   );

@@ -8,6 +8,22 @@
 }
 
 body {
-  background: $clr-page-bg;
+  background-color: $clr-page-bg;
+  background-image: url('./images/lighthouse-g62b283a36_1920.jpg');
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+  background-size: 100vw 300px;
   font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+}
+
+button, select, textarea, input {
+  font: inherit;
+}
+
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 200px auto 12px;
 }

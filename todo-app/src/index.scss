@@ -21,6 +21,10 @@ button, select, textarea, input {
   font: inherit;
 }
 
+input:focus::placeholder {
+  color: transparent;
+}
+
 .todo-app {
   display: flex;
   flex-direction: column;

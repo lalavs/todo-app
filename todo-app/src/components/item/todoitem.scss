@@ -12,6 +12,9 @@
     border-radius: 4px;
     color: $clr-white;
   }
+  &__complete {
+    text-decoration: line-through;
+  }
   &-icons {
     display: flex;
     font-size: 20px;

@@ -3,12 +3,12 @@ import './todoitem.scss';
 import { FiEdit3 } from 'react-icons/fi';
 import { TiDeleteOutline } from 'react-icons/ti';
 
-const TodoItem = ({ items, completeItem }) => {
+const TodoItem = ({ items, completeItem, removeItem }) => {
   
   return items.map((item, index) => (
     <div
       key={index}
-      className='todo-row'
+      className={item.isComplete ? 'todo-row todo-row__complete' : 'todo-row'}
     >
       <div 
         key={item.id}
@@ -18,7 +18,9 @@ const TodoItem = ({ items, completeItem }) => {
       </div>
       <div className='todo-icons'>
         <FiEdit3 />
-        <TiDeleteOutline />
+        <TiDeleteOutline 
+          onClick={() => removeItem(item.id)}
+        />
       </div>
     </div>
   ))

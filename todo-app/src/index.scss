@@ -25,9 +25,17 @@ input:focus::placeholder {
   color: transparent;
 }
 
+h1 {
+  margin: 32px 0;
+  color: $clr-ds-1;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 6px;
+}
+
 .todo-app {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 200px auto 12px;
+  margin: 150px auto 12px;
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import TodoFilter from '../filter/TodoFilter';
 import TodoForm from '../form/TodoForm';
 import TodoItem from '../item/TodoItem';
+import './todo.scss'; 
 
 const Todo = () => {
   const [items, setItems] = useState([
@@ -44,13 +46,16 @@ const Todo = () => {
   return (
     <div>
       <h1>TODOS</h1>
-      <TodoForm onSubmit={addItem} />
-      <TodoItem 
-        items={items}
-        completeItem={completeItem}
-        updateItem={updateItem}
-        removeItem={removeItem}
-      />
+      <div className='todo-card'>
+        <TodoForm onSubmit={addItem} />
+        <TodoItem 
+          items={items}
+          completeItem={completeItem}
+          updateItem={updateItem}
+          removeItem={removeItem}
+        />
+        <TodoFilter />
+        </div>
     </div>
   )
 }

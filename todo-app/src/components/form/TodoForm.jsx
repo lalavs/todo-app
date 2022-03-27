@@ -3,12 +3,6 @@ import './todo-form.scss';
 
 const TodoItem = (props) => {
   const [task, setTask] = useState('');
-  // const [id, setId] = useState(0);
-
-  // const giveId = () => {
-  //   setId(id + 1);
-  //   return id;
-  // }
 
   const addNewTask = (e) => {
     e.preventDefault();

@@ -11,8 +11,10 @@
     border: 1px solid $clr-ds-5;
     border-radius: 4px;
     color: $clr-white;
+    // cursor: pointer;
   }
-  &__complete {
+  &-row__complete {
+    color: $clr-ds-3;
     text-decoration: line-through;
   }
   &-icons {

@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './todo-item.scss';
 import TodoForm from '../form/TodoForm';
-import { FiEdit3 } from 'react-icons/fi';
-import { TiDeleteOutline } from 'react-icons/ti';
+import {FiEdit3} from 'react-icons/fi';
+import {TiDeleteOutline} from 'react-icons/ti';
+import PropTypes from 'prop-types';
 
-const TodoItem = ({ items, completeItem, updateItem, removeItem }) => {
+const TodoItem = ({items, completeItem, updateItem, removeItem}) => {
   const [edit, setEdit] = useState({});
 
   const submitUpdate = (value) => {
@@ -12,14 +13,14 @@ const TodoItem = ({ items, completeItem, updateItem, removeItem }) => {
 
     setEdit({
       id: null,
-      value:''
-    })
-  }
+      value: '',
+    });
+  };
 
   if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />
+    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
-  
+
   return items.map((item, index) => (
     <div
       key={index}
@@ -32,15 +33,28 @@ const TodoItem = ({ items, completeItem, updateItem, removeItem }) => {
         {item.text}
       </div>
       <div className='todo-icons'>
-        <FiEdit3 
+        <FiEdit3
           onClick={() => setEdit({id: item.id, value: item.text})}
         />
-        <TiDeleteOutline 
+        <TiDeleteOutline
           onClick={() => removeItem(item.id)}
         />
       </div>
     </div>
-  ))
-}
+  ));
+};
+
+TodoItem.propTypes = {
+  items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+        status: PropTypes.bool,
+      }),
+  ),
+  completeItem: PropTypes.func,
+  updateItem: PropTypes.func,
+  removeItem: PropTypes.func,
+};
 
 export default TodoItem;

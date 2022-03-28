@@ -11,11 +11,16 @@
     border: 1px solid $clr-ds-5;
     border-radius: 4px;
     color: $clr-white;
-    // cursor: pointer;
   }
   &-row__complete {
     color: $clr-ds-3;
     text-decoration: line-through;
+  }
+  &-editinput {
+    outline: none;
+    border: none;
+    color: $clr-ds-3;
+    background-color: transparent;
   }
   &-icons {
     display: flex;

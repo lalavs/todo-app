@@ -1,45 +1,70 @@
 import React, {useState} from 'react';
-import './todo-item.scss';
-import TodoForm from '../form/TodoForm';
+import PropTypes from 'prop-types';
 import {FiEdit3} from 'react-icons/fi';
 import {TiDeleteOutline} from 'react-icons/ti';
-import PropTypes from 'prop-types';
+import {MdOutlineDone} from 'react-icons/md';
 
-const TodoItem = ({items, completeItem, updateItem, removeItem}) => {
-  const [edit, setEdit] = useState({});
+import './todo-item.scss';
 
-  const submitUpdate = (value) => {
-    updateItem(edit.id, value);
+const TodoItem = ({items, completeItem, removeItem}) => {
+  const [edit, setEdit] = useState(null);
+  const [value, setValue] = useState('');
 
-    setEdit({
-      id: null,
-      value: '',
-    });
+  const editItem = (id, text) => {
+    setEdit(id);
+    setValue(text);
   };
 
-  if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
-  }
+  const saveItem = (id) => {
+    const newItem = [...items].map((item) => {
+      if (item.id === id) {
+        item.text = value;
+      }
+      return;
+    });
+    setValue(newItem);
+    setEdit(null);
+  };
 
   return items.map((item, index) => (
     <div
       key={index}
       className={item.isComplete ? 'todo-row todo-row__complete' : 'todo-row'}
     >
-      <div
-        key={item.id}
-        onClick={() => completeItem(item.id)}
-      >
-        {item.text}
-      </div>
-      <div className='todo-icons'>
-        <FiEdit3
-          onClick={() => setEdit({id: item.id, value: item.text})}
-        />
-        <TiDeleteOutline
-          onClick={() => removeItem(item.id)}
-        />
-      </div>
+      {
+        edit === item.id ?
+          <div>
+            <input
+              className='todo-editinput'
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </div> :
+          <div
+            key={item.id}
+            onClick={() => completeItem(item.id)}
+          >
+            {item.text}
+          </div>
+      }
+
+      {
+        edit === item.id ?
+        <div>
+          <MdOutlineDone
+            onClick={() => saveItem(item.id)}
+            className='todo-icons'
+          />
+        </div> :
+          <div className='todo-icons'>
+            <FiEdit3
+              onClick={() => editItem(item.id, item.text)}
+            />
+            <TiDeleteOutline
+              onClick={() => removeItem(item.id)}
+            />
+          </div>
+      }
     </div>
   ));
 };
@@ -53,7 +78,6 @@ TodoItem.propTypes = {
       }),
   ),
   completeItem: PropTypes.func,
-  updateItem: PropTypes.func,
   removeItem: PropTypes.func,
 };
 

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+
 import TodoFilter from '../filter/TodoFilter';
 import TodoForm from '../form/TodoForm';
 import TodoItem from '../item/TodoItem';
@@ -42,15 +43,8 @@ const Todo = () => {
       }
       return item;
     });
+
     setItems(updatedItems);
-  };
-
-  const updateItem = (id, updatedItem) => {
-    if (!updatedItem.text || /^\s*$/.test(updatedItem.text)) {
-      return;
-    }
-
-    setItems(items.map((item) => item.id === id ? updatedItem : item));
   };
 
   const removeItem = (id) => {
@@ -65,7 +59,6 @@ const Todo = () => {
         <TodoItem
           items={items}
           completeItem={completeItem}
-          updateItem={updateItem}
           removeItem={removeItem}
         />
         <TodoFilter />

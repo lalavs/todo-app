@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+
 import './todo-form.scss';
 
-const TodoItem = (props) => {
+const TodoForm = (props) => {
   const [task, setTask] = useState('');
 
   const addNewTask = (e) => {
@@ -11,6 +12,7 @@ const TodoItem = (props) => {
     props.onSubmit({
       id: Date.now(),
       text: task,
+      status: true,
     });
 
     setTask('');
@@ -36,4 +38,4 @@ const TodoItem = (props) => {
   );
 };
 
-export default TodoItem;
+export default TodoForm;

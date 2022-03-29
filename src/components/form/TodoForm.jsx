@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 
 import './todo-form.scss';
 
@@ -8,11 +9,10 @@ const TodoForm = (props) => {
   const addNewTask = (e) => {
     e.preventDefault();
 
-    // eslint-disable-next-line react/prop-types
     props.onSubmit({
       id: Date.now(),
       text: task,
-      status: true,
+      isComplete: false,
     });
 
     setTask('');
@@ -36,6 +36,10 @@ const TodoForm = (props) => {
       </button>
     </form>
   );
+};
+
+TodoForm.propTypes = {
+  onSubmit: PropTypes.func,
 };
 
 export default TodoForm;

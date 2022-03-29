@@ -10,16 +10,17 @@
     width: 380px;
     border: 1px solid $clr-ds-5;
     border-radius: 4px;
-    color: $clr-white;
+    color: $clr-ds-1;
   }
   &-row__complete {
     color: $clr-ds-3;
     text-decoration: line-through;
   }
-  &-editinput {
+  &-input__edit {
     outline: none;
     border: none;
-    color: $clr-ds-3;
+    width: 320px;
+    color: $clr-ds-5;
     background-color: transparent;
   }
   &-icons {
@@ -27,4 +28,23 @@
     font-size: 20px;
     cursor: pointer;
   }
+  &-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 30px;
+  }
+}
+
+.button-filter {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: black;
+}
+
+.button-filter__active {
+  color: aqua;
 }

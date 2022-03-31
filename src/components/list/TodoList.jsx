@@ -10,12 +10,12 @@ const TodoItem = ({items, setItems}) => {
   const [edit, setEdit] = useState(null);
   const [value, setValue] = useState('');
   const [filtered, setFiltered] = useState(items);
-
-  const [isActive, setActive] = useState(false);
-
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
+  // eslint-disable-next-line no-unused-vars
+  const [buttons, setButtons] = useState({
+    all: false,
+    active: false,
+    completed: false,
+  });
 
   useEffect(() => {
     setFiltered(items);
@@ -52,19 +52,74 @@ const TodoItem = ({items, setItems}) => {
     setEdit(null);
   };
 
-  const itemsFilter = (isComplete) => {
-    if (isComplete === 'all') {
+  const toggle = (type) => {
+    if (buttons[type]) return;
+
+    Object.keys(buttons).forEach((k) => {
+      buttons[k] = false;
+    });
+
+    buttons[type] = true;
+
+    itemsFilter();
+  };
+
+  const itemsFilter = () => {
+    if (buttons['all']) {
       setFiltered(items);
-    } else {
+      return;
+    }
+    if (buttons['active']) {
       const filteredTodo = [...items].filter((item) =>
-        item.isComplete === isComplete);
+        item.isComplete === false);
       setFiltered(filteredTodo);
+      return;
+    }
+    if (buttons['completed']) {
+      const filteredTodo = [...items].filter((item) =>
+        item.isComplete === true);
+      setFiltered(filteredTodo);
+      return;
     }
   };
 
 
   return (
     <div>
+      <div className='todo-filter'>
+        <div>
+          {
+            filtered.length !== 1 ?
+              <div>
+                {filtered.length} items left
+              </div> :
+              <div>
+                {filtered.length} item left
+              </div>
+          }
+        </div>
+        <button
+          className={buttons['all'] ?
+          'button-filter button-filter__active' :
+          'button-filter'}
+          onClick={() => {
+            toggle('all');
+          }}>All</button>
+        <button
+          className={buttons['active'] ?
+          'button-filter button-filter__active' :
+          'button-filter'}
+          onClick={() => {
+            toggle('active');
+          }}>Active</button>
+        <button
+          className={buttons['completed'] ?
+          'button-filter button-filter__active' :
+          'button-filter'}
+          onClick={() => {
+            toggle('completed');
+          }}>Completed</button>
+      </div>
       {
         filtered.map((item, index) => (
           <div
@@ -110,30 +165,6 @@ const TodoItem = ({items, setItems}) => {
           </div>
         ))
       }
-      <div className='todo-filter'>
-        <div>
-          {
-            filtered.length !== 1 ?
-              <div>
-                {filtered.length} items left
-              </div> :
-              <div>
-                {filtered.length} item left
-              </div>
-          }
-        </div>
-        <button
-          className={isActive ?
-          'button-filter__active' :
-          'button-filter'}
-          onClick={() => {
-            itemsFilter(false);
-            toggleClass();
-          }}>Active</button>
-        <button onClick={() => itemsFilter('all')}>All</button>
-        {/* <button onClick={() => itemsFilter(false)}>Active</button> */}
-        <button onClick={() => itemsFilter(true)}>Completed</button>
-      </div>
     </div>
   );
 };

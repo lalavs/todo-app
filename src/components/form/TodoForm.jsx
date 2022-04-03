@@ -3,25 +3,23 @@ import PropTypes from 'prop-types';
 
 import './todo-form.scss';
 
-const TodoForm = (props) => {
+const TodoForm = ({items, setItems}) => {
   const [task, setTask] = useState('');
 
-  const addNewTask = (e) => {
-    e.preventDefault();
-
-    props.onSubmit({
-      id: Date.now(),
-      text: task,
-      isComplete: false,
-    });
-
-    setTask('');
+  const addNewTask = () => {
+    if (task) {
+      setItems(
+          [...items, {
+            id: Date.now(),
+            text: task,
+            isComplete: false,
+          }]);
+      setTask('');
+    }
   };
 
   return (
-    <form
-      className='todo-form'
-      onSubmit={addNewTask}>
+    <div>
       <input
         type='text'
         placeholder='Create a new todo...'
@@ -31,15 +29,23 @@ const TodoForm = (props) => {
       />
       <button
         className='todo-button'
+        onClick={addNewTask}
       >
           Add
       </button>
-    </form>
+    </div>
   );
 };
 
 TodoForm.propTypes = {
-  onSubmit: PropTypes.func,
+  items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+        isComplete: PropTypes.bool,
+      }),
+  ),
+  setItems: PropTypes.func,
 };
 
 export default TodoForm;

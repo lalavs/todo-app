@@ -23,15 +23,14 @@ const Todo = () => {
     },
   ]);
 
-  const addItem = (item) => {
-    setItems([...items, item]);
-  };
-
   return (
     <div>
       <h1>TODOS</h1>
       <div className='todo-card'>
-        <TodoForm onSubmit={addItem} />
+        <TodoForm
+          items={items}
+          setItems={setItems}
+        />
         <TodoList
           items={items}
           setItems={setItems}

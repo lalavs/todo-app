@@ -10,16 +10,16 @@ const TodoItem = ({items, setItems}) => {
   const [edit, setEdit] = useState(null);
   const [value, setValue] = useState('');
   const [filtered, setFiltered] = useState(items);
-  // eslint-disable-next-line no-unused-vars
-  const [buttons, setButtons] = useState({
-    all: false,
-    active: false,
-    completed: false,
-  });
+  const [activeFilter, setActiveFilter] = useState('all');
+
 
   useEffect(() => {
-    setFiltered(items);
+    itemsFilter();
   }, [items]);
+
+  useEffect(() => {
+    itemsFilter();
+  }, [activeFilter]);
 
   const completeItem = (id) => {
     const updatedItems = items.map((item) => {
@@ -48,41 +48,35 @@ const TodoItem = ({items, setItems}) => {
       }
       return;
     });
+
     setValue(newItem);
     setEdit(null);
   };
 
-  const toggle = (type) => {
-    if (buttons[type]) return;
-
-    Object.keys(buttons).forEach((k) => {
-      buttons[k] = false;
-    });
-
-    buttons[type] = true;
+  const changeFilter = (type) => {
+    if (activeFilter === type) return;
+    setActiveFilter(type);
 
     itemsFilter();
   };
 
   const itemsFilter = () => {
-    if (buttons['all']) {
+    if (activeFilter === 'all') {
       setFiltered(items);
-      return;
     }
-    if (buttons['active']) {
+
+    if (activeFilter === 'active') {
       const filteredTodo = [...items].filter((item) =>
         item.isComplete === false);
       setFiltered(filteredTodo);
-      return;
     }
-    if (buttons['completed']) {
+
+    if (activeFilter === 'completed') {
       const filteredTodo = [...items].filter((item) =>
         item.isComplete === true);
       setFiltered(filteredTodo);
-      return;
     }
   };
-
 
   return (
     <div>
@@ -99,34 +93,37 @@ const TodoItem = ({items, setItems}) => {
           }
         </div>
         <button
-          className={buttons['all'] ?
-          'button-filter button-filter__active' :
-          'button-filter'}
+          className={`button-filter
+            ${(activeFilter === 'all') ?
+            'button-filter__active' : ''}`
+          }
           onClick={() => {
-            toggle('all');
+            changeFilter('all');
           }}>All</button>
         <button
-          className={buttons['active'] ?
-          'button-filter button-filter__active' :
-          'button-filter'}
+          className={`button-filter
+            ${(activeFilter === 'active') ?
+            'button-filter__active' : ''}`
+          }
           onClick={() => {
-            toggle('active');
+            changeFilter('active');
           }}>Active</button>
         <button
-          className={buttons['completed'] ?
-          'button-filter button-filter__active' :
-          'button-filter'}
+          className={`button-filter
+            ${(activeFilter === 'completed') ?
+            'button-filter__active' : ''}`
+          }
           onClick={() => {
-            toggle('completed');
+            changeFilter('completed');
           }}>Completed</button>
       </div>
       {
         filtered.map((item, index) => (
           <div
             key={index}
-            className={item.isComplete ?
-              'todo-row todo-row__complete' :
-              'todo-row'}
+            className={`todo-row ${item.isComplete ?
+              'todo-row__complete' : ''}`
+            }
           >
             {
               edit === item.id ?

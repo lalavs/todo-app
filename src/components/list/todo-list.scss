@@ -47,7 +47,13 @@
   background-color: transparent;
   font-size: 14px;
   color: $clr-ds-3;
+  &:hover {
+    cursor: pointer;
+  }
   &__active {
     color: $clr-blue;
+    &:hover {
+      cursor: default;
+    }
   }
 }

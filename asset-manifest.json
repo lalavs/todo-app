@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/todo-app/static/css/main.8b8830f9.css",
+    "main.js": "/todo-app/static/js/main.e0f46c16.js",
+    "static/media/lighthouse-g62b283a36_1920.jpg": "/todo-app/static/media/lighthouse-g62b283a36_1920.54eb1749cce311189cb9.jpg",
+    "static/media/josefin-sans-all-400-normal.woff": "/todo-app/static/media/josefin-sans-all-400-normal.e89cb50b139916039cdc.woff",
+    "static/media/josefin-sans-latin-400-normal.woff2": "/todo-app/static/media/josefin-sans-latin-400-normal.36152c4291179fb52202.woff2",
+    "static/media/josefin-sans-latin-ext-400-normal.woff2": "/todo-app/static/media/josefin-sans-latin-ext-400-normal.3229870392aaa18099d0.woff2",
+    "static/media/josefin-sans-vietnamese-400-normal.woff2": "/todo-app/static/media/josefin-sans-vietnamese-400-normal.4a3e569a0e9e99674d59.woff2",
+    "index.html": "/todo-app/index.html",
+    "main.8b8830f9.css.map": "/todo-app/static/css/main.8b8830f9.css.map",
+    "main.e0f46c16.js.map": "/todo-app/static/js/main.e0f46c16.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b8830f9.css",
+    "static/js/main.e0f46c16.js"
+  ]
+}

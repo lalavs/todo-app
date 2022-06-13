@@ -10,7 +10,6 @@ const TodoForm = ({items, setItems}) => {
     if (task) {
       setItems(
           [...items, {
-            id: Date.now(),
             text: task,
             isComplete: false,
           }]);
@@ -30,6 +29,7 @@ const TodoForm = ({items, setItems}) => {
       <button
         className='todo-button'
         onClick={addNewTask}
+        data-testid='todo-button'
       >
           Add
       </button>

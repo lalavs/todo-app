@@ -6,12 +6,11 @@ import {MdOutlineDone} from 'react-icons/md';
 
 import './todo-list.scss';
 
-const TodoItem = ({items, setItems}) => {
+const TodoList = ({items, setItems}) => {
   const [edit, setEdit] = useState(null);
   const [value, setValue] = useState('');
   const [filtered, setFiltered] = useState(items);
   const [activeFilter, setActiveFilter] = useState('all');
-
 
   useEffect(() => {
     itemsFilter();
@@ -21,35 +20,28 @@ const TodoItem = ({items, setItems}) => {
     itemsFilter();
   }, [activeFilter]);
 
-  const completeItem = (id) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        item.isComplete = !item.isComplete;
-      }
-      return item;
-    });
+  const completeItem = (index) => {
+    items[index].isComplete = !items[index].isComplete;
+    const updated = [...items];
 
-    setItems(updatedItems);
+    setItems(updated);
   };
 
-  const removeItem = (id) => {
-    setItems(items.filter((item) => item.id !== id));
+  const removeItem = (index) => {
+    items.splice(index, 1);
+    const updated = [...items];
+
+    setItems(updated);
   };
 
-  const editItem = (id, text) => {
-    setEdit(id);
+  const editItem = (index, text) => {
+    setEdit(index);
     setValue(text);
   };
 
-  const saveItem = (id) => {
-    const newItem = [...items].map((item) => {
-      if (item.id === id) {
-        item.text = value;
-      }
-      return;
-    });
+  const saveItem = (index) => {
+    items[index].text = value;
 
-    setValue(newItem);
     setEdit(null);
   };
 
@@ -126,7 +118,7 @@ const TodoItem = ({items, setItems}) => {
             }
           >
             {
-              edit === item.id ?
+              edit === index ?
                 <div>
                   <input
                     className='todo-input__edit'
@@ -135,27 +127,28 @@ const TodoItem = ({items, setItems}) => {
                   />
                 </div> :
                 <div
-                  key={item.id}
-                  onClick={() => completeItem(item.id)}
+                  onClick={() => completeItem(index)}
+                  data-testid='complete-item'
                 >
                   {item.text}
                 </div>
             }
 
             {
-              edit === item.id ?
+              edit === index ?
               <div>
                 <MdOutlineDone
-                  onClick={() => saveItem(item.id)}
+                  onClick={() => saveItem(index)}
                   className='todo-icons'
                 />
               </div> :
                 <div className='todo-icons'>
                   <FiEdit3
-                    onClick={() => editItem(item.id, item.text)}
+                    onClick={() => editItem(index, item.text)}
                   />
                   <TiDeleteOutline
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeItem(index)}
+                    data-testid='remove-item'
                   />
                 </div>
             }
@@ -166,10 +159,9 @@ const TodoItem = ({items, setItems}) => {
   );
 };
 
-TodoItem.propTypes = {
+TodoList.propTypes = {
   items: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number,
         text: PropTypes.string,
         isComplete: PropTypes.bool,
       }),
@@ -177,4 +169,4 @@ TodoItem.propTypes = {
   setItems: PropTypes.func,
 };
 
-export default TodoItem;
+export default TodoList;
